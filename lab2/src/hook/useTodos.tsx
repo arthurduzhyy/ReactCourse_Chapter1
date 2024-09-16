@@ -7,13 +7,23 @@ const useTodos = () => {
   const load = () => {
     const storedTodos = localStorage.getItem('todos')
     if (storedTodos) {
-      setTodos((JSON.parse(storedTodos)))
+      try {
+        const parsedTodos = JSON.parse(storedTodos)
+        setTodos(parsedTodos)
+      } catch (e) {
+        console.error('failed to parse todos from local storage: ', e)
+        localStorage.removeItem('todos')
+      }
     } else {
       const fetchTodos = async () => {
-        const response = await fetch('https://jsonplaceholder.typicode.com/todos?_limit=3')
-        const body = await response.json()
-        setTodos(body)
-        localStorage.setItem('todos', JSON.stringify(body))
+        try {
+          const response = await fetch('https://jsonplaceholder.typicode.com/todos?_limit=3')
+          const body = await response.json()
+          setTodos(body)
+          localStorage.setItem('todos', JSON.stringify(body))
+        } catch (e) {
+          console.error('failed to fetch todos: ', e)
+        }
       }
 
       fetchTodos()
