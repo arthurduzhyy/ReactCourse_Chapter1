@@ -44,7 +44,7 @@ const TodoApp = () => {
   const filteredTodos = todos.filter(t => t.title.toLowerCase().includes(searchQuery.toLowerCase()))
 
   return <div>
-    <SearchInput onSearch={setSearchQuery} />
+    <SearchInput query={searchQuery} onSearch={setSearchQuery} />
 
     <TodoForm onSave={onSave} initialTodo={editableTodo} />
 

@@ -1,22 +1,15 @@
-import { ChangeEvent, FC, useState } from 'react'
+import { FC } from 'react'
 
 interface SearchInputProps {
+  query: string
   onSearch: (value: string) => void
 }
 
-const SearchInput: FC<SearchInputProps> = ({ onSearch }) => {
-  const [query, setQuery] = useState<string>('')
-
-  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value
-    setQuery(value)
-    onSearch(value)
-  }
-
+const SearchInput: FC<SearchInputProps> = ({ query, onSearch }) => {
   return <input
     className="search-input"
     value={query}
-    onChange={handleSearch}
+    onChange={e => onSearch(e.target.value)}
     placeholder="Search todos..."
   />
 }
