@@ -1,10 +1,13 @@
+import PageTitle from './component/PageTitle'
 import TodoApp from './component/TodoApp'
 import './App.css'
 
 function App() {
-  return <div>
+  return <>
+    <PageTitle>Todo List</PageTitle>
+
     <TodoApp />
-  </div>
+  </>
 }
 
 export default App
