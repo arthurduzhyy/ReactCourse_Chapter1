@@ -1,30 +1,41 @@
-# React + TypeScript + Vite
+# Lab 2
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Component tree thumbnail
 
-Currently, two official plugins are available:
+![image](https://github.com/user-attachments/assets/20458390-9e41-4896-aaf2-fc5280dfa2e3)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Lab 3
 
-## Expanding the ESLint configuration
+### Component tree thumbnail
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+![image](https://github.com/user-attachments/assets/aa1532f7-194f-4efd-b278-537b55f72411)
 
-- Configure the top-level `parserOptions` property like this:
+# Interaction of the components
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+### TodoApp
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Affects:
+
+- `SearchInput` -- passes the onSearch func that updates the searchQuery in the TodoApp.
+- `TodoForm` -- passes onSave func and initialTodo that adds a new todo or edits an existing.
+- `TodoList` -- passes a list of todos and funcs for working with todos.
+
+Side effects:
+
+Has a side effect on TodoForm and TodoList, as they depend on the state (todos and editableTodo) managed in TodoApp. These components cannot change the state of the task list on their own, but they receive updates after changes in TodoApp.
+
+### SearchInput
+
+Updates the search query by passing the changed value to the onSearch function, which changes the state of the searchQuery in TodoApp.
+
+### TodoForm
+
+Adds a new todo or edits an existing one by calling the onSave func, which changes the state of the todos in the TodoApp.
+
+### TodoList
+
+Displays a list of tasks and passes each task to the TodoItem.
+
+### TodoItem
+
+Calls functions for editing (onEdit), deleting (onDelete), and toggling the task state (onToggle), affecting the state of the task list in the TodoApp.
