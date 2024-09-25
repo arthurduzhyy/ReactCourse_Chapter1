@@ -10,7 +10,7 @@ const TodoApp = () => {
   const [editableTodo, setEditableTodo] = useState<Todo | null>(null)
   const [searchQuery, setSearchQuery] = useState<string>('')
 
-  const { data, loading, error } = useGetData(import.meta.env.VITE_TODOS_API_URL)
+  const { data, loading, error } = useGetData('https://jsonplaceholder.typicode.com/todos?_limit=3')
 
   useEffect(() => {
     if(data && Array.isArray(data)) {
