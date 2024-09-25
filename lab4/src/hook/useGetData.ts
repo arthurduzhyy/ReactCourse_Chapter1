@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
-const useGetData = (url: string) => {
-  const [data, setData] = useState(null)
+const useGetData = <T>(url: string) => {
+  const [data, setData] = useState<T | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error | null>(null)
 
@@ -19,7 +19,7 @@ const useGetData = (url: string) => {
     load()
   }, [url])
 
-  return { data, loading, error }
+  return { data, setData, loading, error }
 }
 
 export default useGetData

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import useGetData from '../hook/useGetData'
 import { Todo } from '../type/todo'
 import SearchInput from './SearchInput'
@@ -6,34 +6,27 @@ import TodoForm from './TodoForm'
 import TodoList from './TodoList'
 
 const TodoApp = () => {
-  const [todos, setTodos] = useState<Todo[]>([])
   const [editableTodo, setEditableTodo] = useState<Todo | null>(null)
   const [searchQuery, setSearchQuery] = useState<string>('')
 
-  const { data, loading, error } = useGetData('https://jsonplaceholder.typicode.com/todos?_limit=3')
-
-  useEffect(() => {
-    if(data && Array.isArray(data)) {
-      setTodos(data)
-    }
-  }, [data])
+  const { data, setData, loading, error } = useGetData<Todo[]>('https://jsonplaceholder.typicode.com/todos?_limit=3')
 
   const handleAdd = (todo: Todo) => {
-    setTodos(prev => [todo, ...prev])
+    setData(prev => prev ? [todo, ...prev] : [todo])
   }
 
   const handleEdit = (todo: Todo) => {
-    setTodos(prev => prev.map(t => t.id === todo.id ? todo : t))
+    setData(prev => prev ? prev.map(t => t.id === todo.id ? todo : t) : null)
   }
 
   const handleDelete = (id: number) => {
-    setTodos(prev => prev.filter(t => t.id !== id))
+    setData(prev => prev ? prev.filter(t => t.id !== id) : [])
   }
 
   const handleToggle = (id: number) => {
-    setTodos(prev => prev.map((todo) =>
+    setData(prev => prev ? prev.map((todo) =>
       todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    ))
+    ) : [])
   }
 
   const onSave = (todo: Todo) => {
@@ -49,7 +42,7 @@ const TodoApp = () => {
     setEditableTodo(todo)
   }
 
-  const filteredTodos = todos.filter(t => t.title.toLowerCase().includes(searchQuery.toLowerCase()))
+  const filteredTodos = data?.filter(t => t.title.toLowerCase().includes(searchQuery.toLowerCase())) || []
 
   return <div>
     <div>
