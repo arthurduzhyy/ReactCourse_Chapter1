@@ -11,7 +11,10 @@ const useGetData = <T>(url: string) => {
     fetch(url)
       .then(r => r.json())
       .then(json => setData(json))
-      .catch(e => setError(e))
+      .catch(e => {
+        setError(e)
+        console.error(e)
+      })
       .finally(() => setLoading(false))
   }
 
