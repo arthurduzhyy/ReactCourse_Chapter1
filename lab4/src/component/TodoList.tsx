@@ -8,7 +8,7 @@ interface TodoListProps extends TodoFuncsProps {
 
 const TodoList: FC<TodoListProps> = ({ todos, onEdit, onDelete, onToggle }) => {
   return <>
-    {todos.length > 0 ? <ul>
+    {todos.length > 0 && <ul>
       {todos.map(t => <TodoItem
         key={t.id}
         todo={t}
@@ -16,7 +16,7 @@ const TodoList: FC<TodoListProps> = ({ todos, onEdit, onDelete, onToggle }) => {
         onDelete={onDelete}
         onToggle={onToggle}
       />)}
-    </ul> : <p>There are no records...</p>}
+    </ul>}
   </>
 }
 

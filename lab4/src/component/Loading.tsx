@@ -11,7 +11,8 @@ function Spinner() {
 
 const Loading: FC<LoadingProps> = ({ loading, children }) => {
   return <div className="loading-container">
-    {loading ? <Spinner /> : children}
+    {loading && <Spinner />}
+    {children}
   </div>
 }
 
