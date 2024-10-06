@@ -2,4 +2,4 @@
 
 Patterns that were used: Conditional rendering, Children as prop, Compound component.
 
-![image](https://github.com/user-attachments/assets/cb9e31b8-5fa9-4520-95d6-8f5c9ce830a3)
+![image](https://github.com/user-attachments/assets/4bd78c18-18ba-4e65-9324-34dfc586bb8a)
